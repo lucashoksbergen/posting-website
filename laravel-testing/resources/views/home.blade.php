@@ -1,7 +1,6 @@
 <x-layout>
-    <x-slot:title>Projects</x-slot:title>
-
+    <x-slot:title>Home Page</x-slot:title>
     <x-slot:heading>
-        Projects
+        Homepage
     </x-slot:heading>
 </x-layout>

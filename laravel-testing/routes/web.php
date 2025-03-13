@@ -1,15 +1,28 @@
 <?php
 
+
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
+class Posts
+{
+    public static function all(): array
+    {
+        return Posts::all();
+    }
+}
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 
 });
 
 
 Route::get('/posts', function () {
-    return view('posts');
+
+
+    return view('posts', ['posts' => Post::all()]);
 
 });
 
