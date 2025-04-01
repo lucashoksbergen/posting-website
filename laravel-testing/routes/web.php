@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('/posts', function () {
 
-    return view('posts', ['posts' => Post::all()]);
+    return view('posts', ['posts' => Post::simplePaginate(7)]);
 
 });
 
