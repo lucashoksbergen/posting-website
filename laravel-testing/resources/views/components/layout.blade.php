@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $slot }}</title>
+    <title>{{ $title }}</title>
     <script src='https://cdn.tailwindcss.com'></script>
 </head>
 
@@ -24,7 +24,6 @@
                                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                                 <x-nav-link href="/" :active="request()->is('/')">Homepage</x-nav-link>
                                 <x-nav-link href="/posts" :active="request()->is('posts')">Posts</x-nav-link>
-                                <x-nav-link href="/projects" :active="request()->is('projects')">Projects</x-nav-link>
                             </div>
                         </div>
                     </div>
@@ -108,7 +107,6 @@
                     <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                     <x-nav-link href="/" :active="request()->is('/')">Homepage</x-nav-link>
                     <x-nav-link href="/posts" :active="request()->is('posts')">Posts</x-nav-link>
-                    <x-nav-link href="/projects" :active="request()->is('projects')">Projects</x-nav-link>
                 </div>
                 <div class="border-t border-gray-700 pt-4 pb-3">
                     <div class="flex items-center px-5">
@@ -118,8 +116,8 @@
                                 alt="">
                         </div>
                         <div class="ml-3">
-                            <div class="text-base/5 font-medium text-white">{{ $username }}</div>
-                            <div class="text-sm font-medium text-gray-400">{{ $useremail }}</div>
+                            <div class="text-base/5 font-medium text-white">Tom Cook</div>
+                            <div class="text-sm font-medium text-gray-400">tomcook@email.com</div>
                         </div>
                         <button type="button"
                             class="relative ml-auto shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
@@ -133,27 +131,27 @@
                         </button>
                     </div>
                     <!-- <div class="mt-3 space-y-1 px-2">
-                        <a href="#"
-                            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your
-                            Profile</a>
-                        <a href="#"
-                            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
-                        <a href="#"
-                            class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign
-                            out</a>
+                    <a href="#"
+                        class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your
+                        Profile</a>
+                    <a href="#"
+                        class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
+                    <a href="#"
+                        class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign
+                        out</a>
                     </div> -->
+
                 </div>
             </div>
         </nav>
 
         <header class="bg-white shadow-sm">
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $slot }}</h1>
+                <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
             </div>
         </header>
         <main>
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                <!-- Your content -->
                 {{ $slot }}
             </div>
         </main>
