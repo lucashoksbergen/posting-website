@@ -21,7 +21,6 @@ Route::get('/', function () {
 
 Route::get('/posts', function () {
 
-
     return view('posts', ['posts' => Post::all()]);
 
 });
@@ -29,7 +28,7 @@ Route::get('/posts', function () {
 Route::get('/posts/{id}', function ($id) {
 
     $post = Post::find($id);
-
+    
     return view('post', ['post' => $post]);
 
 });
