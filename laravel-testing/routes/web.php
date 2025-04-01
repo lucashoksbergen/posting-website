@@ -26,6 +26,14 @@ Route::get('/posts', function () {
 
 });
 
+Route::get('/posts/{id}', function ($id) {
+
+    $post = Post::find($id);
+
+    return view('post', ['post' => $post]);
+
+});
+
 Route::get('/projects', function () {
     return view('projects');
 
