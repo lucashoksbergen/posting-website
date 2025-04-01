@@ -14,4 +14,7 @@
             <br>
         @endforeach
     </ul>
+
+    
+
 </x-layout>
