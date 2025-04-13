@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -17,7 +18,7 @@ class CommentController extends Controller
         Comment::Create([
             'content' => request('content'),
             // Needs to get updated once actual users can happen
-            'user_id' => 1,
+            'user_id' => Auth::id(),
             'post_id' => $post->id,
             'created_at' => now(),
             'updated_at' => now(),
