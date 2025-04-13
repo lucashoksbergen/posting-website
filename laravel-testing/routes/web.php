@@ -1,8 +1,10 @@
 <?php
 
 
-use App\Models\Comment;
-use App\Models\Post;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 class Posts
@@ -13,76 +15,42 @@ class Posts
     }
 }
 
+Route::view('/', 'home');
 
-Route::get('/', function () {
-    return view('home');
+// Route::resource('posts', PostController::class);
+
+Route::controller(PostController::class)->group(function () {
+    Route::get('/posts', 'index');
+    Route::get('/posts/{post}', 'show');
+
+    Route::patch('/posts/{post}', 'update')
+        ->middleware('auth')
+        ->can('edit', 'post');
+
+    Route::delete('/posts/{post}', 'destroy')
+        ->name('posts.destroy')
+        ->middleware('auth')
+        ->can('edit', 'post');
+
+    Route::post('/posts', 'store');
+});
+
+Route::controller(CommentController::class)->group(function () {
+    Route::post('/posts/{post}', 'storecomment');
+
+    Route::delete('/posts/{post}/comments/{comment}', 'destroycomment')
+        ->name('comments.destroy')
+        ->middleware('auth')
+        ->can('editcomment', 'post');
 
 });
 
-// Index
-Route::get('/posts', function () {
+// Auth
 
-    return view('posts.index', ['posts' => Post::all()]);
+Route::get('/register', [RegisteredUserController::class, 'create']);
+Route::post('/register', [RegisteredUserController::class, 'store']);
 
-});
-
-// Individual Posts
-Route::get('/posts/{id}', function ($id) {
-
-    $post = Post::find($id);
-
-    return view('posts.show', ['post' => $post]);
-
-});
-
-// Update Post
-Route::patch('/posts/{id}', function ($id) {
-    request()->validate([
-        'title' => ['required'],
-        'content' => ['required']
-    ]);
-
-
-    $post = Post::findOrFail($id);
-
-    $post->update([
-        'title' => request('title'),
-        'content' => request('content'),
-        'updated_at' => now(),
-    ]);
-
-    return redirect('/posts/' . $post->id);
-
-});
-
-// Create Comment
-Route::post('/posts/{id}', function ($id) {
-
-    request()->validate([
-        'content' => ['required'],
-    ]);
-
-    Comment::Create([
-        'content' => request('content'),
-        // Needs to get updated once actual users can happen
-        'user_id' => 1,
-        'post_id' => $id,
-        'created_at' => now(),
-        'updated_at' => now(),
-
-    ]);
-
-    return redirect('/posts/' . $id);
-});
-
-
-// Destroy Post
-Route::delete('/posts/{id}', function ($id) {
-
-    Post::findOrFail($id)->delete();
-
-    return redirect('/posts');
-
-});
-
-// Need to make system to delete comments
+Route::get('/login', [SessionController::class, 'create'])
+    ->name('login');
+Route::post('/login', [SessionController::class, 'store']);
+Route::post('/logout', [SessionController::class, 'destroy']);
