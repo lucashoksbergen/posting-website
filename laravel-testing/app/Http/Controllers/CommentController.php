@@ -17,7 +17,6 @@ class CommentController extends Controller
 
         Comment::Create([
             'content' => request('content'),
-            // Needs to get updated once actual users can happen
             'user_id' => Auth::id(),
             'post_id' => $post->id,
             'created_at' => now(),

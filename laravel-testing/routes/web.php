@@ -12,10 +12,10 @@ class Posts
     public static function all(): array
     {
         return Posts::all();
+        // N+1 problem prob
     }
 }
 
-Route::view('/', 'home');
 
 // Route::resource('posts', PostController::class);
 

@@ -20,12 +20,12 @@
 
                 <div class="sm:col-span-4">
                     <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
-                    <x-input-field name="title" placeholder="{{ $post->title }}"></x-input-field>
+                    <x-input-field name="title" placeholder="{{ $post->title }}" >{{ old('title', $post->title) }}</x-input-field>
                     @error('title')
                         <p class="text-xs text-red-500 font-semibold mt-1">{{ $message }}</p>
                     @enderror
                     <label for="content" class="block text-sm/6 font-medium text-gray-900">Content</label>
-                    <x-input-field name="content" placeholder="{{ $post->content }}" rows="4"></x-input-field>
+                    <x-input-field name="content" placeholder="{{ $post->content }}" rows="4" >{{ old('content', $post->content) }}</x-input-field>
                     @error('content')
                         <p class="text-xs text-red-500 font-semibold mt-1">{{ $message}}</p>
                     @enderror
@@ -33,12 +33,12 @@
                 <div class="mt-6 flex items-center justify-between gap-x-6 pb-4">
                     <div class="flex items-center">
                         <x-delete-button form="delete-post">Delete Post</x-delete-button>
-                        </div>
+                    </div>
 
                     <div class="flex items-center gap-x-6">
                         <x-submit-button>Save</x-submit-button>
-                        </div>
-                        </div>
+                    </div>
+                </div>
             </form>
         @endcan
 
@@ -77,7 +77,7 @@
     <!-- Create Comment -->
     <form method="POST" action="/posts/{{ $post->id }}">
         @csrf
-        <h2 class="text-base/7 font-semibold text-gray-900 pt-6">Comment</h2>
+        <h2 class="text-base/7 font-semibold text-gray-900 pt-6" >Comment</h2>
         <div class="sm:col-span-4">
             <div class="mt-2">
                 <div

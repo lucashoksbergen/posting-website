@@ -44,16 +44,22 @@ class PostController extends Controller
 
     public function update(Post $post)
     {
-        request()->validate([
-            'title' => ['required'],
-            'content' => ['required']
+        $validated = request()->validate([
+            'title' => 'sometimes',
+            'content' => 'sometimes'
         ]);
 
-        $post->update([
-            'title' => request('title'),
-            'content' => request('content'),
-            'updated_at' => now(),
-        ]);
+        if(empty($validated)) {
+            return back()->withErrors(['message' => 'Please update at least one field.']);
+        }
+
+        $post->fill($validated);
+
+        if (!$post->isDirty()) {
+            return back()->withErrors(['message' => 'No changes detected']);
+        }
+
+        $post->save();
 
         return redirect('/posts/' . $post->id);
     }
